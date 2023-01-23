@@ -36,32 +36,38 @@ export const Search = () => {
   const handleChange = (e) => {
     setUrl(e.target.value);
   };
-  console.log(searchs);
+
+  const [error, setError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .get(`https://api.shrtco.de/v2/shorten?url=${url}`)
-      .then((res) => {
-        console.log(res.data);
-        let prevStorage = sessionStorage.getItem("searchs");
-        let dataUrl = {
-          link: res.data.result.full_short_link,
-          search: res.data.result.original_link,
-          copied: false,
-          id: res.data.result.code,
-        };
-        if (prevStorage == null) {
-          let arr = [];
-          arr.push(dataUrl);
-          sessionStorage.setItem("searchs", JSON.stringify(arr));
-        } else {
-          let arr = JSON.parse(prevStorage);
-          arr.push(dataUrl);
-          sessionStorage.setItem("searchs", JSON.stringify(arr));
-        }
-      })
-      .catch((err) => console.log(err));
+    if (url.trim().length == 0) {
+      setError(true);
+    } else {
+      axios
+        .get(`https://api.shrtco.de/v2/shorten?url=${url}`)
+        .then((res) => {
+          console.log(res.data);
+          let prevStorage = sessionStorage.getItem("searchs");
+          let dataUrl = {
+            link: res.data.result.full_short_link,
+            search: res.data.result.original_link,
+            copied: false,
+            id: res.data.result.code,
+          };
+          if (prevStorage == null) {
+            let arr = [];
+            arr.push(dataUrl);
+            sessionStorage.setItem("searchs", JSON.stringify(arr));
+          } else {
+            let arr = JSON.parse(prevStorage);
+            arr.push(dataUrl);
+            sessionStorage.setItem("searchs", JSON.stringify(arr));
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+
     setUrl("");
   };
 
@@ -103,6 +109,7 @@ export const Search = () => {
           placeholder="Shorten a link here..."
           value={url}
           onChange={handleChange}
+          error={error}
         />
         <Button
           variant="contained"
