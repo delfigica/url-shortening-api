@@ -1,30 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  TextField,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import desktop from "../assets/bg-shorten-desktop.svg";
+import mobile from "../assets/bg-shorten-mobile.svg";
 import axios from "axios";
 
 export const Search = () => {
-  //   const searchs = [
-  //     {
-  //       id: 0,
-  //       search: "https://www.frontendmentor.io",
-  //       link: "https://rel.ink/k4lKyk",
-  //       copied: false,
-  //     },
-  //     {
-  //       id: 1,
-  //       search: "https://www.twitter.com/frontendmentor",
-  //       link: "https://rel.ink/gxOXp9",
-  //       copied: true,
-  //     },
-  //     {
-  //       id: 2,
-  //       search: "https://www.linkedin.com/frontendmentor",
-  //       link: "https://rel.ink/gob3X9",
-  //       copied: false,
-  //     },
-  //   ];
-
   const [searchs, setSearchs] = useState();
 
   useEffect(() => {
@@ -79,32 +66,71 @@ export const Search = () => {
       ...searchs.slice(index + 1),
     ]);
   };
+
+  const theme = useTheme();
+
+  const laptop = useMediaQuery(theme.breakpoints.up("lg"));
+
   return (
-    <Box sx={{ height: "60vh", backgroundColor: "#F1F1F1", marginTop: "50px" }}>
+    <Box
+      sx={
+        laptop
+          ? { height: "60vh", backgroundColor: "#F1F1F1", marginTop: "50px" }
+          : { minHeight: "85vh", backgroundColor: "#F1F1F1", marginTop: "50px" }
+      }
+    >
       <Box
-        sx={{
-          width: "70vw",
-          height: "130px",
-          backgroundColor: "hsl(257, 27%, 26%)",
-          backgroundImage: `url(${desktop})`,
-          backgroundRepeat: "no-repeat",
-          margin: "10px auto",
-          borderRadius: "10px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          position: "relative",
-          top: "-60px",
-        }}
+        sx={
+          laptop
+            ? {
+                width: "70vw",
+                height: "130px",
+                backgroundColor: "hsl(257, 27%, 26%)",
+                backgroundImage: `url(${desktop})`,
+                backgroundRepeat: "no-repeat",
+                margin: "10px auto",
+                borderRadius: "10px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                position: "relative",
+                top: "-60px",
+              }
+            : {
+                backgroundColor: "hsl(257, 27%, 26%)",
+                backgroundImage: `url(${mobile})`,
+                backgroundRepeat: "no-repeat",
+                width: "90vw",
+                height: "130px",
+                position: "relative",
+                top: "-60px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "column",
+                borderRadius: "10px",
+                margin: "10px auto",
+                backgroundSize: "200px",
+              }
+        }
       >
         <TextField
           type="text"
-          sx={{
-            width: "600px",
-            margin: "0px 30px",
-            backgroundColor: "white",
-            borderRadius: "5px",
-          }}
+          sx={
+            laptop
+              ? {
+                  width: "600px",
+                  margin: "0px 30px",
+                  backgroundColor: "white",
+                  borderRadius: "5px",
+                }
+              : {
+                  width: "90%",
+                  backgroundColor: "white",
+                  borderRadius: "5px",
+                  margin: "10px 0px",
+                }
+          }
           size="small"
           placeholder="Shorten a link here..."
           value={url}
@@ -113,7 +139,11 @@ export const Search = () => {
         />
         <Button
           variant="contained"
-          sx={{ color: "white", fontWeight: 500 }}
+          sx={
+            laptop
+              ? { color: "white", fontWeight: 500 }
+              : { color: "white", fontWeight: 500, width: "90%" }
+          }
           onClick={handleSubmit}
         >
           Shorten It!
@@ -132,26 +162,50 @@ export const Search = () => {
           searchs.map((search, index) => (
             <Box
               key={search.id}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                width: "70vw",
-                padding: "10px 15px",
-                backgroundColor: "white",
-                margin: "5px 0px",
-                borderRadius: "5px",
-              }}
+              sx={
+                laptop
+                  ? {
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      width: "70vw",
+                      padding: "10px 15px",
+                      margin: "5px 0px",
+                      backgroundColor: "white",
+                      borderRadius: "5px",
+                    }
+                  : {
+                      display: "flex",
+                      //   alignItems: "center",
+                      justifyContent: "space-between",
+                      flexDirection: "column",
+                      backgroundColor: "white",
+                      borderRadius: "5px",
+                      margin: "10px",
+                      padding: "1em",
+                      width: '90%'
+                    }
+              }
             >
-              <Typography>{search.search}</Typography>
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                <Typography color="primary" sx={{ margin: "0px 20px" }}>
+              <Typography sx={laptop ? {} : { margin: "10px 0px" }}>
+                {search.search}
+              </Typography>
+              {!laptop && <hr />}
+              <Box sx={laptop ? { display: "flex", alignItems: "center" } : {}}>
+                <Typography
+                  color="primary"
+                  sx={laptop ? { margin: "0px 20px" } : { margin: "10px 0px" }}
+                >
                   {search.link}
                 </Typography>
                 <Button
                   variant="contained"
                   color={search.copied ? "secondary" : "primary"}
-                  sx={{ width: "100px", color: "white" }}
+                  sx={
+                    laptop
+                      ? { width: "100px", color: "white" }
+                      : { width: "100%", color: "white" }
+                  }
                   onClick={() => clipBoard(search.link, index)}
                 >
                   {search.copied ? "copied!" : "copy"}

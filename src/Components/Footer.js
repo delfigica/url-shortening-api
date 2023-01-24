@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import desktop from "../assets/bg-boost-desktop.svg";
 import logo from "../assets/logo-white.svg";
 
@@ -7,6 +7,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import PinterestIcon from "@mui/icons-material/Pinterest";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import { useTheme } from "@emotion/react";
 
 export const Footer = () => {
   const links = [
@@ -71,6 +72,10 @@ export const Footer = () => {
     />,
   ];
 
+  const theme = useTheme();
+
+  const laptop = useMediaQuery(theme.breakpoints.up("lg"));
+
   return (
     <Box>
       <Box
@@ -86,7 +91,13 @@ export const Footer = () => {
           justifyContent: "center",
         }}
       >
-        <Typography sx={{ fontSize: "2.5em", fontWeight: 700, color: "white" }}>
+        <Typography
+          sx={
+            laptop
+              ? { fontSize: "2.5em", fontWeight: 700, color: "white" }
+              : { fontSize: "1.5em", fontWeight: 700, color: "white" }
+          }
+        >
           Boost your links today
         </Typography>
         <Button
@@ -103,34 +114,63 @@ export const Footer = () => {
         </Button>
       </Box>
       <Box
-        sx={{
-          height: "50vh",
-          backgroundColor: "hsl(255, 11%, 22%)",
-          color: "white",
-          padding: "5em",
-          display: "flex",
-          justifyContent: "space-evenly",
-          width: "100%",
-        }}
+        sx={
+          laptop
+            ? {
+                height: "50vh",
+                backgroundColor: "hsl(255, 11%, 22%)",
+                color: "white",
+                padding: "5em",
+                display: "flex",
+                justifyContent: "space-evenly",
+                width: "100%",
+              }
+            : {
+                padding: "1em",
+                display: "flex",
+                flexDirection: "column",
+                backgroundColor: "hsl(255, 11%, 22%)",
+                color: "white",
+                alignItems: "center",
+              }
+        }
       >
-        <Box sx={{ width: "100px" }}>
+        <Box sx={laptop ? { width: "100px" } : { margin: "20px 0px" }}>
           <img src={logo} />
         </Box>
-        <Box sx={{ display: "flex", marginLeft: "130px" }}>
+        <Box sx={laptop ? { display: "flex", marginLeft: "130px" } : {}}>
           {links.map((link) => (
             <Box key={link.title} sx={{ margin: "0px 25px" }}>
-              <Typography sx={{ fontWeight: 700, marginBottom: "15px" }}>
+              <Typography
+                sx={
+                  laptop
+                    ? { fontWeight: 700, marginBottom: "15px" }
+                    : {
+                        fontWeight: 700,
+                        // marginBottom: "15px",
+                        textAlign: "center",
+                      }
+                }
+              >
                 {link.title}
               </Typography>
               {link.links.map((link) => (
                 <Typography
                   key={link}
-                  sx={{
-                    color: "hsl(257, 7%, 63%)",
-                    margin: "5px 0px",
-                    cursor: "pointer",
-                    "&:hover": { color: "hsl(180, 66%, 49%)" },
-                  }}
+                  sx={
+                    laptop
+                      ? {
+                          color: "hsl(257, 7%, 63%)",
+                          margin: "5px 0px",
+                          cursor: "pointer",
+                          "&:hover": { color: "hsl(180, 66%, 49%)" },
+                        }
+                      : {
+                          color: "hsl(257, 7%, 63%)",
+                          textAlign: "center",
+                          margin: '10px 0px'
+                        }
+                  }
                 >
                   {link}
                 </Typography>
@@ -138,7 +178,7 @@ export const Footer = () => {
             </Box>
           ))}
         </Box>
-        <Box sx={{ display: "flex", margin: "0px 15px" }}>
+        <Box sx={ laptop ? { display: "flex", margin: "0px 15px" } : {  display: "flex", margin: "15px"  }}>
           {sociales.map((social) => (
             <Box key={social} sx={{ width: "25px", margin: "0px 10px" }}>
               {social}
