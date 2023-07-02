@@ -80,11 +80,12 @@ export const Footer = () => {
     <Box>
       <Box
         sx={{
-          height: "38vh",
+          height: "30vh",
           width: "100%",
           backgroundColor: "hsl(257, 27%, 26%)",
           backgroundImage: `url(${desktop})`,
           backgroundRepeat: "no-repeat",
+          backgroundSize: '2200px',
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -117,7 +118,7 @@ export const Footer = () => {
         sx={
           laptop
             ? {
-                height: "50vh",
+                height: "30vh",
                 backgroundColor: "hsl(255, 11%, 22%)",
                 color: "white",
                 padding: "5em",
@@ -147,7 +148,6 @@ export const Footer = () => {
                     ? { fontWeight: 700, marginBottom: "15px" }
                     : {
                         fontWeight: 700,
-                        // marginBottom: "15px",
                         textAlign: "center",
                       }
                 }

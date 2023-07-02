@@ -24,6 +24,8 @@ export const NavBar = () => {
               alignItems: "center",
               justifyContent: "space-between",
               padding: "2em 4em",
+              width: '80%',
+              margin: '0 auto'
             }
           : {
               padding: "1em",

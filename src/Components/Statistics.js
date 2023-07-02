@@ -44,7 +44,7 @@ export const Statistics = () => {
     <Box
       sx={
         laptop
-          ? { height: "90vh", backgroundColor: "#F1F1F1" }
+          ? { height: "60vh", backgroundColor: "#F1F1F1" }
           : { backgroundColor: "#F1F1F1", padding: "20px 0px" }
       }
     >

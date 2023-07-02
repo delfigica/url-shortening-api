@@ -34,7 +34,6 @@ export const Search = () => {
       axios
         .get(`https://api.shrtco.de/v2/shorten?url=${url}`)
         .then((res) => {
-          console.log(res.data);
           let prevStorage = sessionStorage.getItem("searchs");
           let dataUrl = {
             link: res.data.result.full_short_link,
@@ -45,10 +44,12 @@ export const Search = () => {
           if (prevStorage == null) {
             let arr = [];
             arr.push(dataUrl);
+            setSearchs(arr)
             sessionStorage.setItem("searchs", JSON.stringify(arr));
           } else {
             let arr = JSON.parse(prevStorage);
             arr.push(dataUrl);
+            setSearchs(arr)
             sessionStorage.setItem("searchs", JSON.stringify(arr));
           }
         })
@@ -88,6 +89,7 @@ export const Search = () => {
                 backgroundColor: "hsl(257, 27%, 26%)",
                 backgroundImage: `url(${desktop})`,
                 backgroundRepeat: "no-repeat",
+                backgroundSize: "1500px",
                 margin: "10px auto",
                 borderRadius: "10px",
                 display: "flex",
@@ -155,7 +157,7 @@ export const Search = () => {
           flexDirection: "column",
           alignItems: "center",
           position: "relative",
-          top: "-50px",
+          top: "-20px",
         }}
       >
         {searchs ? (
@@ -183,7 +185,7 @@ export const Search = () => {
                       borderRadius: "5px",
                       margin: "10px",
                       padding: "1em",
-                      width: '90%'
+                      width: "90%",
                     }
               }
             >

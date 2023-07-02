@@ -21,7 +21,7 @@ export const Banner = () => {
               height: "70vh",
               display: "flex",
               alignItems: "center",
-              justifyContent: "space-evenly",
+              justifyContent: "flex-end",
             }
           : {
               display: "flex",
@@ -32,7 +32,7 @@ export const Banner = () => {
       <Box
         sx={
           laptop
-            ? { width: "40%", marginLeft: "-40px" }
+            ? { width: "49%", marginLeft: "-140px" }
             : { width: "90%", margin: " 0px auto" }
         }
       >
@@ -44,6 +44,7 @@ export const Banner = () => {
                   fontSize: "4em",
                   fontWeight: 700,
                   lineHeight: "80px",
+                  width: '60%'
                 }
               : {
                   color: "hsl(255, 11%, 22%)",
@@ -59,7 +60,7 @@ export const Banner = () => {
         <Typography
           sx={
             laptop
-              ? { fontSize: "18px", fontWeight: 500, color: "hsl(0, 0%, 75%)" }
+              ? { fontSize: "18px", fontWeight: 500, color: "hsl(0, 0%, 75%)", width: '50%' }
               : {
                   fontSize: "16px",
                   fontWeight: 500,
@@ -101,9 +102,9 @@ export const Banner = () => {
             ? {
                 backgroundImage: `url(${desktop})`,
                 backgroundRepeat: "no-repeat",
-                width: "500px",
-                height: "500px",
-                backgroundSize: "550px",
+                width: "700px",
+                height: "700px",
+                backgroundSize: "750px",
                 position: "relative",
                 left: "116px",
                 top: "50px",
