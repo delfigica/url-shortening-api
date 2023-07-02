@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/url-shortening-api/static/css/main.053e46fb.css",
-    "main.js": "/url-shortening-api/static/js/main.51fe3b53.js",
+    "main.js": "/url-shortening-api/static/js/main.4fdacef3.js",
     "static/media/illustration-working.svg": "/url-shortening-api/static/media/illustration-working.c9b5ef5452363d8be3df709375d50bd0.svg",
     "static/media/logo.svg": "/url-shortening-api/static/media/logo.834643034343520f3b4d7e43111ed4d8.svg",
     "static/media/logo-white.svg": "/url-shortening-api/static/media/logo-white.116d01beb00e3048831bf718f69bd124.svg",
@@ -13,10 +13,10 @@
     "static/media/bg-shorten-desktop.svg": "/url-shortening-api/static/media/bg-shorten-desktop.0d9742f433f4b0d8752b40ccf28727af.svg",
     "static/media/bg-shorten-mobile.svg": "/url-shortening-api/static/media/bg-shorten-mobile.41c34b33a14a3077e506acb101113013.svg",
     "main.053e46fb.css.map": "/url-shortening-api/static/css/main.053e46fb.css.map",
-    "main.51fe3b53.js.map": "/url-shortening-api/static/js/main.51fe3b53.js.map"
+    "main.4fdacef3.js.map": "/url-shortening-api/static/js/main.4fdacef3.js.map"
   },
   "entrypoints": [
     "static/css/main.053e46fb.css",
-    "static/js/main.51fe3b53.js"
+    "static/js/main.4fdacef3.js"
   ]
 }
